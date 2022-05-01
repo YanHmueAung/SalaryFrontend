@@ -1,0 +1,31 @@
+.theLayout {
+    min-height: 100vh;
+}
+
+.sider {
+    overflow: auto;
+    height: 100vh;
+    position: fixed;
+    left: 0;
+    top: 0;
+    bottom: 0;
+}
+
+.user {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem 0;
+}
+
+.openDrawerIcon {
+    font-size: 2rem;
+    position: absolute;
+    bottom: 1rem;
+    left: 1rem;
+    z-index: 1;
+}
+
+.content {
+    margin: 16px;
+}
