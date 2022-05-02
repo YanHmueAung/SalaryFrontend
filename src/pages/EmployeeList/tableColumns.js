@@ -1,7 +1,8 @@
-import { Button, InputNumber, Space } from "antd";
+import { Button, InputNumber, Space, Typography } from "antd";
 import styles from "./EmployeeList.module.css";
-import { FilterOutlined } from "@ant-design/icons";
+import { SearchOutlined } from "@ant-design/icons";
 import isBetween from "../../utils/isBetween";
+const { Text } = Typography;
 const tableColumns = [
     {
         title: "Id",
@@ -31,6 +32,12 @@ const tableColumns = [
         width: 100,
         sorter: (a, b) => parseInt(a.salary) - parseInt(b.salary),
         render: (text) => 'S$' + text,
+        filterIcon: (filtered) => (
+            <Space align='center'>
+                <Text className={filtered && styles.filterActive} type={filtered || 'secondary'}>Filter</Text>
+                <SearchOutlined />
+            </Space>
+        ),
         filterDropdown: ({ setSelectedKeys, selectedKeys, confirm, clearFilters }) => (
             <Space direction='vertical' className={styles.filterDropDown}>
                 <Space direction='vertical'>
@@ -59,7 +66,7 @@ const tableColumns = [
                     <Button
                         type="primary"
                         onClick={() => confirm()}
-                        icon={<FilterOutlined />}
+                        icon={<SearchOutlined />}
                         className={styles.filterSalaryButton}
                     >
                         Filter
