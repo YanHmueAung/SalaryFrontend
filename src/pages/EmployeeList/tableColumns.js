@@ -1,29 +1,28 @@
-import isBetween from "../../utils/isBetween";
 import { Button, InputNumber, Space } from "antd";
+import styles from "./EmployeeList.module.css";
 import { FilterOutlined } from "@ant-design/icons";
-import styles from './EmployeeList.module.css';
-
-const columns = [
+import isBetween from "../../utils/isBetween";
+const tableColumns = [
     {
         title: "Id",
-        dataIndex: "id",
-        key: "id",
+        dataIndex: "_id",
+        key: "_id",
         width: 100,
-        sorter: (a, b) => a.id.localeCompare(b.id)
+        sorter: (a, b) => a._id.localeCompare(b._id)
     },
     {
         title: "Name",
-        dataIndex: "fullName",
-        key: "fullName",
+        dataIndex: "name",
+        key: "name",
         width: 100,
-        sorter: (a, b) => a.fullName.localeCompare(b.fullName)
+        sorter: (a, b) => a.name.localeCompare(b.name)
     },
     {
         title: "Login",
-        dataIndex: "username",
-        key: "username",
+        dataIndex: "login",
+        key: "login",
         width: 100,
-        sorter: (a, b) => a.username.localeCompare(b.username)
+        sorter: (a, b) => a.login.localeCompare(b.login)
     },
     {
         title: "Salary",
@@ -38,7 +37,6 @@ const columns = [
                     <InputNumber
                         placeholder='Minimum salary'
                         className={styles.filterSalaryInput}
-                        step="0.01"
                         min={1}
                         value={selectedKeys[0] ? selectedKeys[0][0] : undefined}
                         onChange={value => {
@@ -49,7 +47,6 @@ const columns = [
                     <InputNumber
                         placeholder='Maximum salary'
                         className={styles.filterSalaryInput}
-                        step="0.01"
                         min={1}
                         value={selectedKeys[0] ? selectedKeys[0][1] : undefined}
                         onChange={value => {
@@ -76,10 +73,8 @@ const columns = [
                 </Space>
             </Space>
         ),
-        onFilter: (value, record) => {
-            return isBetween(record.salary, value[0], value[1])
-        }
-    },
+        onFilter: (value, record) => isBetween(record.salary, value[0], value[1])
+    }
 ]
 
-export default columns;
+export default tableColumns;

@@ -1,7 +1,7 @@
-import {useEffect, useState} from "react";
-import {api} from "./api";
+import { useEffect, useState } from "react";
+import { api } from "./api";
 
-const useFetchData = (endpoint) => {
+const useFetchData = (endpoint, refresh) => {
     const [data, setData] = useState(null);
     const [error, setError] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
@@ -27,9 +27,9 @@ const useFetchData = (endpoint) => {
             }
         })();
 
-    }, [endpoint]);
+    }, [endpoint, refresh]);
 
-    return {data, error, isLoading};
+    return { data, error, isLoading };
 }
 
 export default useFetchData;
