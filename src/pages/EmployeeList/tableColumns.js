@@ -65,7 +65,7 @@ const tableColumns = [
                         Filter
                     </Button>
                     <Button
-                        onClick={() => clearFilters()}
+                        onClick={() => clearFilters({ confirm: true })}
                         className={styles.filterSalaryButton}
                     >
                         Reset
