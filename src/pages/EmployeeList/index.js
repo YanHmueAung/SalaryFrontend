@@ -58,7 +58,7 @@ const EmployeeList = ({ toggleDrawer }) => {
                             const onFailed = () => {
                                 message.error('Error occurred while trying to deleted!')
                             }
-                            await deleteData(EMPLOYEES + `/${record._id}`, setIsDeleting, onSuccess, onFailed)
+                            await deleteData(EMPLOYEES + `/${record.id}`, setIsDeleting, onSuccess, onFailed)
                         }}
                         okText='Yes'
                         cancelText='No'
@@ -107,6 +107,7 @@ const EmployeeList = ({ toggleDrawer }) => {
             <UploadEmployeeModal
                 visible={uploadModalVisible}
                 setVisible={setUploadModalVisible}
+                setRefresh={setRefresh}
             />
         </Card>
     )

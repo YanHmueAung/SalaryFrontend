@@ -1,10 +1,19 @@
-import { Modal } from "antd";
+import { message, Modal } from "antd";
+import { EMPLOYEES } from "../../../constants/endpoints";
+import FileUpload from "../../../components/FileUpload";
 
-const UploadEmployeeModal = ({ visible, setVisible }) => {
+const UploadEmployeeModal = ({ visible, setVisible, setRefresh }) => {
     const hideModal = () => {
         setVisible(false);
     }
+    const onUploadSuccess = () => {
+        message.success('Uploaded!');
+        setRefresh(prevState => prevState + 1);
+    }
 
+    const onUploadFailed = () => {
+        message.error('Rejected: one or more of the rows fails validation!');
+    }
     return (
         <Modal
             visible={visible}
@@ -12,7 +21,13 @@ const UploadEmployeeModal = ({ visible, setVisible }) => {
             footer={null}
             onCancel={hideModal}
         >
-            test
+            <FileUpload
+                uploadUrl={`${EMPLOYEES}/upload`}
+                multiple={false}
+                accept='text/csv'
+                onSuccess={onUploadSuccess}
+                onFailed={onUploadFailed}
+            />
         </Modal>
     )
 }
