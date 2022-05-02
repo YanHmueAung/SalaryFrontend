@@ -22,7 +22,7 @@ const EditDetailModal = ({ visible, setVisible, form, refreshTheList }) => {
         }
         const onSuccess = () => message.success('Saved!');
         const onFailed = () => message.error('Login username already exists!');
-        await putData(EMPLOYEES + `/${form.getFieldsValue()._id}`, payload, setIsEditing, onSuccess, onFailed);
+        await putData(EMPLOYEES + `/${form.getFieldsValue().id}`, payload, setIsEditing, onSuccess, onFailed);
     }
 
     return (
@@ -50,7 +50,7 @@ const EditDetailModal = ({ visible, setVisible, form, refreshTheList }) => {
         >
             <Form layout='vertical' form={form}>
                 <Form.Item
-                    name='_id'
+                    name='id'
                     label='Id'
                 >
                     <Input disabled />

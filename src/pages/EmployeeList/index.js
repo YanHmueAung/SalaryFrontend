@@ -1,7 +1,6 @@
 import { Button, Card, Form, message, Popconfirm, Space, Typography } from "antd";
 import styles from './EmployeeList.module.css';
-import { DeleteOutlined, EditOutlined, MenuOutlined } from "@ant-design/icons";
-import DataTable from "../../components/DataTable";
+import { DeleteOutlined, EditOutlined, MenuOutlined, UploadOutlined } from "@ant-design/icons"; import DataTable from "../../components/DataTable";
 import columns from "./tableColumns";
 import { EMPLOYEES } from "../../constants/endpoints";
 import useFetchData from "../../utils/useFetchData";
@@ -9,6 +8,7 @@ import deleteData from "../../utils/deleteData";
 import { useState } from "react";
 import tableColumns from "./tableColumns";
 import EditDetailModal from "./EditDetailModal";
+import UploadEmployeeModal from "./UploadEmployeeModal";
 
 const { Text } = Typography;
 
@@ -16,6 +16,7 @@ const EmployeeList = ({ toggleDrawer }) => {
     const [refresh, setRefresh] = useState(1);
     const [editModalVisible, setEditModalVisible] = useState(false);
     const [isDeleting, setIsDeleting] = useState(false);
+    const [uploadModalVisible, setUploadModalVisible] = useState(false);
     const [editForm] = Form.useForm();
 
     const { data, error, isLoading } = useFetchData(EMPLOYEES, refresh);
@@ -38,7 +39,7 @@ const EmployeeList = ({ toggleDrawer }) => {
                         icon={<EditOutlined />}
                         onClick={() => {
                             const prev = {
-                                _id: record._id,
+                                id: record.id,
                                 login: record.login,
                                 name: record.name,
                                 salary: record.salary
@@ -80,6 +81,14 @@ const EmployeeList = ({ toggleDrawer }) => {
                     <Text strong>Employees</Text>
                 </Space>
             }
+            extra={
+                <Button
+                    icon={<UploadOutlined />}
+                    onClick={() => setUploadModalVisible(true)}
+                >
+                    Upload employees
+                </Button>
+            }
             className={styles.container}
         >
             <DataTable
@@ -94,6 +103,10 @@ const EmployeeList = ({ toggleDrawer }) => {
                 setVisible={setEditModalVisible}
                 form={editForm}
                 refreshTheList={refreshTheList}
+            />
+            <UploadEmployeeModal
+                visible={uploadModalVisible}
+                setVisible={setUploadModalVisible}
             />
         </Card>
     )

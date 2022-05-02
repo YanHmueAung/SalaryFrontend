@@ -5,10 +5,10 @@ import isBetween from "../../utils/isBetween";
 const tableColumns = [
     {
         title: "Id",
-        dataIndex: "_id",
-        key: "_id",
+        dataIndex: "id",
+        key: "id",
         width: 100,
-        sorter: (a, b) => a._id.localeCompare(b._id)
+        sorter: (a, b) => a.id.localeCompare(b.id)
     },
     {
         title: "Name",
