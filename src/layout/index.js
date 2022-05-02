@@ -1,13 +1,13 @@
-import {Avatar, Drawer, Layout, Space, Typography} from "antd";
-import {useState} from "react";
-import SideMenu from "./SideMenu/SideMenu";
+import { Avatar, Drawer, Layout, Space, Typography } from "antd";
+import { useState } from "react";
+import SideMenu from "./SideMenu";
 import styles from "./TheLayout.module.css";
-import {AntDesignOutlined, RightOutlined} from "@ant-design/icons";
-import {Content} from "antd/es/layout/layout";
+import { AntDesignOutlined } from "@ant-design/icons";
+import { Content } from "antd/es/layout/layout";
 import EmployeeList from "../pages/EmployeeList";
 
-const {Sider} = Layout;
-const {Text} = Typography;
+const { Sider } = Layout;
+const { Text } = Typography;
 
 const TheLayout = () => {
     const [isCollapsed, setIsCollapsed] = useState(false);
@@ -20,11 +20,9 @@ const TheLayout = () => {
             <Drawer
                 placement='left'
                 visible={drawerVisible}
-                closable={true}
-                closeIcon={null}
                 onClose={toggleDrawer}
             >
-                <SideMenu/>
+                <SideMenu />
             </Drawer>
 
             <Layout className={styles.theLayout}>
@@ -44,25 +42,19 @@ const TheLayout = () => {
                     <div className={styles.user}>
                         <Space align='center' direction='vertical'>
                             <Avatar
-                                size={{xs: 24, sm: 32, md: 40, lg: 64, xl: 80, xxl: 100}}
-                                icon={<AntDesignOutlined/>}
+                                size={{ xs: 24, sm: 32, md: 40, lg: 64, xl: 80, xxl: 100 }}
+                                icon={<AntDesignOutlined />}
                                 alt='user avatar'
                             />
                             <Text>Username</Text>
                         </Space>
                     </div>
-                    <SideMenu/>
+                    <SideMenu />
                 </Sider>
 
-                <Layout style={{marginLeft: isCollapsed ? 0 : 200}}>
-                    {isCollapsed && (
-                        <RightOutlined
-                            className={styles.openDrawerIcon}
-                            onClick={toggleDrawer}
-                        />
-                    )}
+                <Layout style={{ marginLeft: isCollapsed ? 0 : 200 }}>
                     <Content className={styles.content}>
-                        <EmployeeList/>
+                        <EmployeeList toggleDrawer={isCollapsed && toggleDrawer} />
                     </Content>
                 </Layout>
             </Layout>
